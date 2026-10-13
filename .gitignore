@@ -1,0 +1,29 @@
+# Protected inputs and locally generated outputs
+/data/
+/results/
+/external/
+/checkpoints/
+/logs/
+/paper/
+*.npz
+*.pt
+*.pth
+*.ckpt
+*.log
+*.lock
+
+# Python and tool caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
+.coverage
+htmlcov/
+
+# Temporary files
+*.tmp
+*.part
+_work/
+_archive/

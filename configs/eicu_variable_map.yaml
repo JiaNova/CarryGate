@@ -1,0 +1,537 @@
+version: 1
+dataset: eicu
+schema: eicu_crd
+variable_names:
+- Albumin
+- ALP
+- ALT
+- AST
+- BUN
+- Bilirubin
+- Cholesterol
+- Creatinine
+- DiasABP
+- FiO2
+- GCS
+- Glucose
+- HCO3
+- HCT
+- HR
+- K
+- Lactate
+- Mg
+- MAP
+- MechVent
+- Na
+- NIDiasABP
+- NIMAP
+- NISysABP
+- PaCO2
+- PaO2
+- pH
+- Platelets
+- RespRate
+- SaO2
+- SysABP
+- Temp
+- TroponinI
+- TroponinT
+- Urine
+- WBC
+- Weight
+structural_candidates:
+- Cholesterol
+- MechVent
+- TroponinI
+excluded_variable_ids:
+- 6
+- 19
+- 32
+cohort:
+  first_unit_stay_column: unitvisitnumber
+  first_unit_stay_value: 1
+  min_age_years: 16
+  min_unit_discharge_offset_minutes: 2880
+  label_column: unitdischargestatus
+  alive_label: Alive
+  expired_label: Expired
+  sample_size: 12000
+  sample_seed: 42
+  split_seed: 42
+  observation_window_hours: 24.0
+  horizon_hours: 48.0
+variables:
+  Albumin:
+    var_id: 0
+    source_schema: eicu_crd
+    source_table: pivoted_lab
+    source_column: albumin
+    offset_column: chartoffset
+    join_key: patientunitstayid
+    source_kind: numeric
+    itemid: 1000
+    unit_rule: identity
+    verified: true
+    structurally_missing: false
+  ALP:
+    var_id: 1
+    source_schema: eicu_crd
+    source_table: pivoted_lab
+    source_column: alp
+    offset_column: chartoffset
+    join_key: patientunitstayid
+    source_kind: numeric
+    itemid: 1001
+    unit_rule: identity
+    verified: true
+    structurally_missing: false
+  ALT:
+    var_id: 2
+    source_schema: eicu_crd
+    source_table: pivoted_lab
+    source_column: alt
+    offset_column: chartoffset
+    join_key: patientunitstayid
+    source_kind: numeric
+    itemid: 1002
+    unit_rule: identity
+    verified: true
+    structurally_missing: false
+  AST:
+    var_id: 3
+    source_schema: eicu_crd
+    source_table: pivoted_lab
+    source_column: ast
+    offset_column: chartoffset
+    join_key: patientunitstayid
+    source_kind: numeric
+    itemid: 1003
+    unit_rule: identity
+    verified: true
+    structurally_missing: false
+  BUN:
+    var_id: 4
+    source_schema: eicu_crd
+    source_table: pivoted_lab
+    source_column: bun
+    offset_column: chartoffset
+    join_key: patientunitstayid
+    source_kind: numeric
+    itemid: 1004
+    unit_rule: identity
+    verified: true
+    structurally_missing: false
+  Bilirubin:
+    var_id: 5
+    source_schema: eicu_crd
+    source_table: pivoted_lab
+    source_column: bilirubin
+    offset_column: chartoffset
+    join_key: patientunitstayid
+    source_kind: numeric
+    itemid: 1005
+    unit_rule: identity
+    verified: true
+    structurally_missing: false
+  Cholesterol:
+    var_id: 6
+    source_schema: eicu_crd
+    source_table: lab
+    source_column: labresult
+    labname: total cholesterol
+    offset_column: labresultoffset
+    join_key: patientunitstayid
+    source_kind: lab_exact
+    itemid: 1006
+    unit_rule: identity
+    verified: true
+    structurally_missing: false
+    verification_note: Exact labname equality; no pattern matching.
+  Creatinine:
+    var_id: 7
+    source_schema: eicu_crd
+    source_table: pivoted_lab
+    source_column: creatinine
+    offset_column: chartoffset
+    join_key: patientunitstayid
+    source_kind: numeric
+    itemid: 1007
+    unit_rule: identity
+    verified: true
+    structurally_missing: false
+  DiasABP:
+    var_id: 8
+    source_schema: eicu_crd
+    source_table: pivoted_vital
+    source_column: ibp_diastolic
+    offset_column: chartoffset
+    join_key: patientunitstayid
+    source_kind: numeric
+    itemid: 1008
+    unit_rule: identity
+    verified: true
+    structurally_missing: false
+  FiO2:
+    var_id: 9
+    source_schema: eicu_crd
+    source_table: pivoted_bg
+    source_column: fio2
+    offset_column: chartoffset
+    join_key: patientunitstayid
+    source_kind: numeric
+    itemid: 1009
+    unit_rule: fraction_or_percent
+    verified: true
+    structurally_missing: false
+    verification_note: Live pivoted_o2 has no fio2 column; pivoted_bg.fio2 is the
+      verified available field.
+  GCS:
+    var_id: 10
+    source_schema: eicu_crd
+    source_table: pivoted_score
+    source_column: gcs
+    offset_column: chartoffset
+    join_key: patientunitstayid
+    source_kind: numeric
+    itemid: 1010
+    unit_rule: gcs_3_to_15
+    verified: true
+    structurally_missing: false
+  Glucose:
+    var_id: 11
+    source_schema: eicu_crd
+    source_table: pivoted_lab
+    source_column: glucose
+    offset_column: chartoffset
+    join_key: patientunitstayid
+    source_kind: numeric
+    itemid: 1011
+    unit_rule: identity
+    verified: true
+    structurally_missing: false
+  HCO3:
+    var_id: 12
+    source_schema: eicu_crd
+    source_table: pivoted_lab
+    source_column: bicarbonate
+    offset_column: chartoffset
+    join_key: patientunitstayid
+    source_kind: numeric
+    itemid: 1012
+    unit_rule: identity
+    verified: true
+    structurally_missing: false
+  HCT:
+    var_id: 13
+    source_schema: eicu_crd
+    source_table: pivoted_lab
+    source_column: hematocrit
+    offset_column: chartoffset
+    join_key: patientunitstayid
+    source_kind: numeric
+    itemid: 1013
+    unit_rule: identity
+    verified: true
+    structurally_missing: false
+  HR:
+    var_id: 14
+    source_schema: eicu_crd
+    source_table: pivoted_vital
+    source_column: heartrate
+    offset_column: chartoffset
+    join_key: patientunitstayid
+    source_kind: numeric
+    itemid: 1014
+    unit_rule: identity
+    verified: true
+    structurally_missing: false
+  K:
+    var_id: 15
+    source_schema: eicu_crd
+    source_table: pivoted_lab
+    source_column: potassium
+    offset_column: chartoffset
+    join_key: patientunitstayid
+    source_kind: numeric
+    itemid: 1015
+    unit_rule: identity
+    verified: true
+    structurally_missing: false
+  Lactate:
+    var_id: 16
+    source_schema: eicu_crd
+    source_table: pivoted_lab
+    source_column: lactate
+    offset_column: chartoffset
+    join_key: patientunitstayid
+    source_kind: numeric
+    itemid: 1016
+    unit_rule: identity
+    verified: true
+    structurally_missing: false
+  Mg:
+    var_id: 17
+    source_schema: eicu_crd
+    source_table: lab
+    source_column: labresult
+    labname: magnesium
+    offset_column: labresultoffset
+    join_key: patientunitstayid
+    source_kind: lab_exact
+    itemid: 1017
+    unit_rule: identity
+    verified: true
+    structurally_missing: false
+    verification_note: Exact labname equality; no pattern matching.
+  MAP:
+    var_id: 18
+    source_schema: eicu_crd
+    source_table: pivoted_vital
+    source_column: ibp_mean
+    offset_column: chartoffset
+    join_key: patientunitstayid
+    source_kind: numeric
+    itemid: 1018
+    unit_rule: identity
+    verified: true
+    structurally_missing: false
+    verification_note: Invasive MAP field as specified by the registered 37-variable
+      table.
+  MechVent:
+    var_id: 19
+    source_schema: eicu_crd
+    source_table: respiratorycare
+    start_column: ventstartoffset
+    end_column: ventendoffset
+    status_column: airwaytype
+    status_values:
+    - Oral ETT
+    - Nasal ETT
+    - Tracheostomy
+    - Cricothyrotomy
+    - Double-Lumen Tube
+    join_key: patientunitstayid
+    source_kind: interval_binary
+    itemid: 1019
+    unit_rule: one_at_vent_start
+    verified: true
+    structurally_missing: false
+    verification_note: Exact invasive-airway values; emit value 1 only, never an end-of-interval
+      zero.
+  Na:
+    var_id: 20
+    source_schema: eicu_crd
+    source_table: pivoted_lab
+    source_column: sodium
+    offset_column: chartoffset
+    join_key: patientunitstayid
+    source_kind: numeric
+    itemid: 1020
+    unit_rule: identity
+    verified: true
+    structurally_missing: false
+  NIDiasABP:
+    var_id: 21
+    source_schema: eicu_crd
+    source_table: pivoted_vital
+    source_column: nibp_diastolic
+    offset_column: chartoffset
+    join_key: patientunitstayid
+    source_kind: numeric
+    itemid: 1021
+    unit_rule: identity
+    verified: true
+    structurally_missing: false
+  NIMAP:
+    var_id: 22
+    source_schema: eicu_crd
+    source_table: pivoted_vital
+    source_column: nibp_mean
+    offset_column: chartoffset
+    join_key: patientunitstayid
+    source_kind: numeric
+    itemid: 1022
+    unit_rule: identity
+    verified: true
+    structurally_missing: false
+  NISysABP:
+    var_id: 23
+    source_schema: eicu_crd
+    source_table: pivoted_vital
+    source_column: nibp_systolic
+    offset_column: chartoffset
+    join_key: patientunitstayid
+    source_kind: numeric
+    itemid: 1023
+    unit_rule: identity
+    verified: true
+    structurally_missing: false
+  PaCO2:
+    var_id: 24
+    source_schema: eicu_crd
+    source_table: pivoted_bg
+    source_column: paco2
+    offset_column: chartoffset
+    join_key: patientunitstayid
+    source_kind: numeric
+    itemid: 1024
+    unit_rule: arterial_derivative_verified
+    verified: true
+    structurally_missing: false
+    verification_note: pivoted_bg has no specimen column; live schema is the registered
+      derivative source.
+  PaO2:
+    var_id: 25
+    source_schema: eicu_crd
+    source_table: pivoted_bg
+    source_column: pao2
+    offset_column: chartoffset
+    join_key: patientunitstayid
+    source_kind: numeric
+    itemid: 1025
+    unit_rule: arterial_derivative_verified
+    verified: true
+    structurally_missing: false
+    verification_note: pivoted_bg has no specimen column; live schema is the registered
+      derivative source.
+  pH:
+    var_id: 26
+    source_schema: eicu_crd
+    source_table: pivoted_bg
+    source_column: ph
+    offset_column: chartoffset
+    join_key: patientunitstayid
+    source_kind: numeric
+    itemid: 1026
+    unit_rule: arterial_derivative_verified
+    verified: true
+    structurally_missing: false
+    verification_note: pivoted_bg has no specimen column; live schema is the registered
+      derivative source.
+  Platelets:
+    var_id: 27
+    source_schema: eicu_crd
+    source_table: pivoted_lab
+    source_column: platelets
+    offset_column: chartoffset
+    join_key: patientunitstayid
+    source_kind: numeric
+    itemid: 1027
+    unit_rule: identity
+    verified: true
+    structurally_missing: false
+  RespRate:
+    var_id: 28
+    source_schema: eicu_crd
+    source_table: pivoted_vital
+    source_column: respiratoryrate
+    offset_column: chartoffset
+    join_key: patientunitstayid
+    source_kind: numeric
+    itemid: 1028
+    unit_rule: identity
+    verified: true
+    structurally_missing: false
+  SaO2:
+    var_id: 29
+    source_schema: eicu_crd
+    source_table: pivoted_vital
+    source_column: spo2
+    offset_column: chartoffset
+    join_key: patientunitstayid
+    source_kind: numeric
+    itemid: 1029
+    unit_rule: identity
+    verified: true
+    structurally_missing: false
+  SysABP:
+    var_id: 30
+    source_schema: eicu_crd
+    source_table: pivoted_vital
+    source_column: ibp_systolic
+    offset_column: chartoffset
+    join_key: patientunitstayid
+    source_kind: numeric
+    itemid: 1030
+    unit_rule: identity
+    verified: true
+    structurally_missing: false
+  Temp:
+    var_id: 31
+    source_schema: eicu_crd
+    source_table: pivoted_vital
+    source_column: temperature
+    offset_column: chartoffset
+    join_key: patientunitstayid
+    source_kind: numeric
+    itemid: 1031
+    unit_rule: celsius_verified
+    verified: true
+    structurally_missing: false
+    verification_note: pivoted_vital is the cleaned nurse-charted derivative; raw
+      vitalperiodic.temperature is not used.
+  TroponinI:
+    var_id: 32
+    source_schema: eicu_crd
+    source_table: lab
+    source_column: labresult
+    labname: troponin - I
+    offset_column: labresultoffset
+    join_key: patientunitstayid
+    source_kind: lab_exact
+    itemid: 1032
+    unit_rule: identity
+    verified: true
+    structurally_missing: false
+    verification_note: Exact labname equality; no pattern matching.
+  TroponinT:
+    var_id: 33
+    source_schema: eicu_crd
+    source_table: lab
+    source_column: labresult
+    labname: troponin - T
+    offset_column: labresultoffset
+    join_key: patientunitstayid
+    source_kind: lab_exact
+    itemid: 1033
+    unit_rule: identity
+    verified: true
+    structurally_missing: false
+    verification_note: Exact labname equality; no pattern matching.
+  Urine:
+    var_id: 34
+    source_schema: eicu_crd
+    source_table: pivoted_uo
+    source_column: urineoutput
+    offset_column: chartoffset
+    join_key: patientunitstayid
+    source_kind: numeric
+    itemid: 1034
+    unit_rule: identity
+    verified: true
+    structurally_missing: false
+  WBC:
+    var_id: 35
+    source_schema: eicu_crd
+    source_table: pivoted_lab
+    source_column: wbc
+    offset_column: chartoffset
+    join_key: patientunitstayid
+    source_kind: numeric
+    itemid: 1035
+    unit_rule: identity
+    verified: true
+    structurally_missing: false
+  Weight:
+    var_id: 36
+    source_schema: eicu_crd
+    source_table: patient
+    source_column: admissionweight
+    join_key: patientunitstayid
+    source_kind: static_single
+    itemid: 1036
+    unit_rule: admission_single_point
+    verified: true
+    structurally_missing: false
+    verification_note: One admissionweight value per patient unit stay; emitted at
+      hour 0.

@@ -1,0 +1,478 @@
+version: 1
+dataset: mimiciv
+variable_names:
+- Albumin
+- ALP
+- ALT
+- AST
+- BUN
+- Bilirubin
+- Cholesterol
+- Creatinine
+- DiasABP
+- FiO2
+- GCS
+- Glucose
+- HCO3
+- HCT
+- HR
+- K
+- Lactate
+- Mg
+- MAP
+- MechVent
+- Na
+- NIDiasABP
+- NIMAP
+- NISysABP
+- PaCO2
+- PaO2
+- pH
+- Platelets
+- RespRate
+- SaO2
+- SysABP
+- Temp
+- TroponinI
+- TroponinT
+- Urine
+- WBC
+- Weight
+structural_candidates:
+- Cholesterol
+- MechVent
+- TroponinI
+variables:
+  Albumin:
+    var_id: 0
+    source_schema: mimiciv_derived
+    source_table: chemistry
+    source_column: albumin
+    join_key: hadm_id
+    source_kind: numeric
+    unit_rule: identity
+    required: true
+    verified: true
+    structurally_missing: false
+  ALP:
+    var_id: 1
+    source_schema: mimiciv_derived
+    source_table: enzyme
+    source_column: alp
+    join_key: hadm_id
+    source_kind: numeric
+    unit_rule: identity
+    required: true
+    verified: true
+    structurally_missing: false
+  ALT:
+    var_id: 2
+    source_schema: mimiciv_derived
+    source_table: enzyme
+    source_column: alt
+    join_key: hadm_id
+    source_kind: numeric
+    unit_rule: identity
+    required: true
+    verified: true
+    structurally_missing: false
+  AST:
+    var_id: 3
+    source_schema: mimiciv_derived
+    source_table: enzyme
+    source_column: ast
+    join_key: hadm_id
+    source_kind: numeric
+    unit_rule: identity
+    required: true
+    verified: true
+    structurally_missing: false
+  BUN:
+    var_id: 4
+    source_schema: mimiciv_derived
+    source_table: chemistry
+    source_column: bun
+    join_key: hadm_id
+    source_kind: numeric
+    unit_rule: identity
+    required: true
+    verified: true
+    structurally_missing: false
+  Bilirubin:
+    var_id: 5
+    source_schema: mimiciv_derived
+    source_table: enzyme
+    source_column: bilirubin_total
+    join_key: hadm_id
+    source_kind: numeric
+    unit_rule: identity
+    required: true
+    verified: true
+    structurally_missing: false
+  Cholesterol:
+    var_id: 6
+    source_schema: mimiciv_hosp
+    source_table: labevents
+    source_column: valuenum
+    itemids:
+    - 50907
+    item_labels:
+      '50907': Cholesterol, Total
+    join_key: hadm_id
+    source_kind: labevent_item
+    unit_rule: identity
+    required: true
+    structural_candidate: true
+    verified: true
+    structurally_missing: false
+  Creatinine:
+    var_id: 7
+    source_schema: mimiciv_derived
+    source_table: chemistry
+    source_column: creatinine
+    join_key: hadm_id
+    source_kind: numeric
+    unit_rule: identity
+    required: true
+    verified: true
+    structurally_missing: false
+  DiasABP:
+    var_id: 8
+    source_schema: mimiciv_derived
+    source_table: vitalsign
+    source_column: dbp
+    join_key: stay_id
+    source_kind: numeric
+    unit_rule: identity
+    required: true
+    verified: true
+    structurally_missing: false
+  FiO2:
+    var_id: 9
+    source_schema: mimiciv_derived
+    source_table: bg
+    source_columns:
+    - fio2
+    - fio2_chartevents
+    join_key: hadm_id
+    source_kind: numeric
+    unit_rule: fio2_percent_to_fraction
+    required: true
+    verified: true
+    structurally_missing: false
+  GCS:
+    var_id: 10
+    source_schema: mimiciv_derived
+    source_table: gcs
+    source_column: gcs
+    join_key: stay_id
+    source_kind: numeric
+    unit_rule: gcs_total_3_to_15
+    required: true
+    verified: true
+    structurally_missing: false
+  Glucose:
+    var_id: 11
+    source_schema: mimiciv_derived
+    source_table: chemistry
+    source_column: glucose
+    join_key: hadm_id
+    source_kind: numeric
+    unit_rule: identity
+    required: true
+    verified: true
+    structurally_missing: false
+  HCO3:
+    var_id: 12
+    source_schema: mimiciv_derived
+    source_table: chemistry
+    source_column: bicarbonate
+    join_key: hadm_id
+    source_kind: numeric
+    unit_rule: identity
+    required: true
+    verified: true
+    structurally_missing: false
+  HCT:
+    var_id: 13
+    source_schema: mimiciv_derived
+    source_table: complete_blood_count
+    source_column: hematocrit
+    join_key: hadm_id
+    source_kind: numeric
+    unit_rule: identity
+    required: true
+    verified: true
+    structurally_missing: false
+  HR:
+    var_id: 14
+    source_schema: mimiciv_derived
+    source_table: vitalsign
+    source_column: heart_rate
+    join_key: stay_id
+    source_kind: numeric
+    unit_rule: identity
+    required: true
+    verified: true
+    structurally_missing: false
+  K:
+    var_id: 15
+    source_schema: mimiciv_derived
+    source_table: chemistry
+    source_column: potassium
+    join_key: hadm_id
+    source_kind: numeric
+    unit_rule: identity
+    required: true
+    verified: true
+    structurally_missing: false
+  Lactate:
+    var_id: 16
+    source_schema: mimiciv_derived
+    source_table: bg
+    source_column: lactate
+    join_key: hadm_id
+    source_kind: numeric
+    unit_rule: identity
+    required: true
+    verified: true
+    structurally_missing: false
+  Mg:
+    var_id: 17
+    source_schema: mimiciv_hosp
+    source_table: labevents
+    source_column: valuenum
+    itemids:
+    - 50960
+    item_labels:
+      '50960': Magnesium
+    join_key: hadm_id
+    source_kind: labevent_item
+    unit_rule: identity
+    required: true
+    verified: true
+    structurally_missing: false
+  MAP:
+    var_id: 18
+    source_schema: mimiciv_derived
+    source_table: vitalsign
+    source_column: mbp
+    join_key: stay_id
+    source_kind: numeric
+    unit_rule: identity
+    required: true
+    verified: true
+    structurally_missing: false
+  MechVent:
+    var_id: 19
+    source_schema: mimiciv_derived
+    source_table: ventilation
+    start_column: starttime
+    end_column: endtime
+    status_column: ventilation_status
+    status_value: InvasiveVent
+    join_key: stay_id
+    source_kind: interval_binary
+    unit_rule: invasive_vent_interval_boundaries
+    required: true
+    structural_candidate: true
+    verified: true
+    structurally_missing: false
+  Na:
+    var_id: 20
+    source_schema: mimiciv_derived
+    source_table: chemistry
+    source_column: sodium
+    join_key: hadm_id
+    source_kind: numeric
+    unit_rule: identity
+    required: true
+    verified: true
+    structurally_missing: false
+  NIDiasABP:
+    var_id: 21
+    source_schema: mimiciv_derived
+    source_table: vitalsign
+    source_column: dbp_ni
+    join_key: stay_id
+    source_kind: numeric
+    unit_rule: identity
+    required: true
+    verified: true
+    structurally_missing: false
+  NIMAP:
+    var_id: 22
+    source_schema: mimiciv_derived
+    source_table: vitalsign
+    source_column: mbp_ni
+    join_key: stay_id
+    source_kind: numeric
+    unit_rule: identity
+    required: true
+    verified: true
+    structurally_missing: false
+  NISysABP:
+    var_id: 23
+    source_schema: mimiciv_derived
+    source_table: vitalsign
+    source_column: sbp_ni
+    join_key: stay_id
+    source_kind: numeric
+    unit_rule: identity
+    required: true
+    verified: true
+    structurally_missing: false
+  PaCO2:
+    var_id: 24
+    source_schema: mimiciv_derived
+    source_table: bg
+    source_column: pco2
+    filter: specimen_art
+    join_key: hadm_id
+    source_kind: numeric
+    unit_rule: arterial_specimen_only
+    required: true
+    verified: true
+    structurally_missing: false
+  PaO2:
+    var_id: 25
+    source_schema: mimiciv_derived
+    source_table: bg
+    source_column: po2
+    filter: specimen_art
+    join_key: hadm_id
+    source_kind: numeric
+    unit_rule: arterial_specimen_only
+    required: true
+    verified: true
+    structurally_missing: false
+  pH:
+    var_id: 26
+    source_schema: mimiciv_derived
+    source_table: bg
+    source_column: ph
+    filter: specimen_art
+    join_key: hadm_id
+    source_kind: numeric
+    unit_rule: arterial_specimen_only
+    required: true
+    verified: true
+    structurally_missing: false
+  Platelets:
+    var_id: 27
+    source_schema: mimiciv_derived
+    source_table: complete_blood_count
+    source_column: platelet
+    join_key: hadm_id
+    source_kind: numeric
+    unit_rule: identity
+    required: true
+    verified: true
+    structurally_missing: false
+  RespRate:
+    var_id: 28
+    source_schema: mimiciv_derived
+    source_table: vitalsign
+    source_column: resp_rate
+    join_key: stay_id
+    source_kind: numeric
+    unit_rule: identity
+    required: true
+    verified: true
+    structurally_missing: false
+  SaO2:
+    var_id: 29
+    source_schema: mimiciv_derived
+    source_table: vitalsign
+    source_column: spo2
+    join_key: stay_id
+    source_kind: numeric
+    unit_rule: identity
+    required: true
+    verified: true
+    structurally_missing: false
+  SysABP:
+    var_id: 30
+    source_schema: mimiciv_derived
+    source_table: vitalsign
+    source_column: sbp
+    join_key: stay_id
+    source_kind: numeric
+    unit_rule: identity
+    required: true
+    verified: true
+    structurally_missing: false
+  Temp:
+    var_id: 31
+    source_schema: mimiciv_derived
+    source_table: vitalsign
+    source_column: temperature
+    join_key: stay_id
+    source_kind: numeric
+    unit_rule: fahrenheit_above_50_to_celsius
+    required: true
+    verified: true
+    structurally_missing: false
+  TroponinI:
+    var_id: 32
+    source_schema: mimiciv_hosp
+    source_table: labevents
+    source_column: valuenum
+    itemids:
+    - 51002
+    - 52642
+    item_labels:
+      '51002': Troponin I
+      '52642': Troponin I
+    join_key: hadm_id
+    source_kind: labevent_item
+    unit_rule: identity
+    required: true
+    structural_candidate: true
+    verified: true
+    structurally_missing: true
+  TroponinT:
+    var_id: 33
+    source_schema: mimiciv_derived
+    source_table: cardiac_marker
+    source_column: troponin_t
+    join_key: hadm_id
+    source_kind: numeric
+    unit_rule: identity
+    required: true
+    verified: true
+    structurally_missing: false
+  Urine:
+    var_id: 34
+    source_schema: mimiciv_derived
+    source_table: urine_output
+    source_column: urineoutput
+    join_key: stay_id
+    source_kind: numeric
+    unit_rule: instantaneous_ml_event
+    required: true
+    verified: true
+    structurally_missing: false
+  WBC:
+    var_id: 35
+    source_schema: mimiciv_derived
+    source_table: complete_blood_count
+    source_column: wbc
+    join_key: hadm_id
+    source_kind: numeric
+    unit_rule: identity
+    required: true
+    verified: true
+    structurally_missing: false
+  Weight:
+    var_id: 36
+    source_schema: mimiciv_derived
+    source_table: weight_durations
+    source_column: weight
+    start_column: starttime
+    join_key: stay_id
+    source_kind: interval_start
+    unit_rule: interval_start_kg_deduplicate
+    required: true
+    verified: true
+    structurally_missing: false

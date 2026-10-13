@@ -1,0 +1,49 @@
+# JBI R2: only-change-split control for the registered E-M1-K16 arm.
+# The model/training budget is copied from configs/eicu_m1.yaml; only the
+# eICU cache/split/output paths identify the patient-grouped extension.
+forecast_cache: data/processed/eicu_events_jbi_v1.pkl
+forecast_split: data/processed/eicu_split_indices_jbi_v1.json
+phase5_output_dir: results/jbi/e1_eicu_patient_k16
+device: cuda
+head_type: residual
+encoder_type: identity
+grouping: shared
+gate_scope: per_variable
+gate_hidden: 8
+recency_num_centers: 8
+recency_parameterization: fixed
+recency_x_range: [0.0, 4.0]
+recency_spline_order: 3
+d_model: 64
+nhead: 4
+num_layers: 2
+d_ff: 128
+dropout: 0.1
+mlp_hidden: 16
+grid_size: 8
+spline_order: 3
+spline_x_range: [-3.0, 3.0]
+basis: rbf
+num_centers: 8
+n_freq: 6
+calibration_batches: 20
+latency_repeats: 5
+batch_size: 128
+num_workers: 0
+epochs: 80
+patience: 5
+eps_repro: 1.0e-12
+learning_rate: 0.001
+weight_decay: 0.0001
+mortality_weight: 0.1
+deterministic: true
+matrix_seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+excluded_variables: [6, 19, 32]
+test_variables: [0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33, 34, 35, 36]
+matrix_arms:
+  E-M1-K16:
+    gate_type: kan
+    gate_scope: per_variable
+    recency_basis: rbf
+    recency_num_centers: 16
+    recency_parameterization: adaptive
